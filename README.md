@@ -20,17 +20,13 @@
     *   [Scripts](#scripts)
     *   [What Is My Computer Doing?](#what-is-my-computer-doing)
     *   [Inspect Hardware](#inspect-hardware)
-    *   [Clock](#clock)
     *   [Network](#network)
-    *   [External Display](#external-display)
-    *   [Shutdown](#shutdown)
-    *   [Standby](#standby)
     *   [Install and Remove Software](#install-and-remove-software)
 
-Linux Basics[¶](#linux-basics "Permalink to this headline")
+Linux Basics(#linux-basics "Permalink to this headline")
 ===========================================================
 
-The Console and Shell[¶](#the-console-and-shell "Permalink to this headline")
+The Console and Shell(#the-console-and-shell "Permalink to this headline")
 -----------------------------------------------------------------------------
 
 With the provided SD card inserted, MNT Reform will boot to a Linux console, which is a pure text interface (opposed to a graphical windowing environment). This is so that you have a chance to learn about the lowest level of interaction with the operating system before moving on to more fully featured desktops. If something goes wrong, you can always go back to this level and fix things—if you know a few basics of Linux administration.
@@ -43,7 +39,7 @@ This chapter will introduce you to the basics of exploring and administering you
 
 The “GNU Bourne-Again Shell”.
 
-Set a Root Password[¶](#set-a-root-password "Permalink to this headline")
+Set a Root Password(#set-a-root-password "Permalink to this headline")
 -------------------------------------------------------------------------
 
 The most powerful user in the system is `root`. When logged in as `root`, you can modify but also destroy any file in the system. To prevent others from logging in as `root`, you should protect the account with a password. In the shell, you execute all commands by typing them in and pressing _ENTER_. To set your password, execute this command:
@@ -54,7 +50,7 @@ The `passwd` command will ask you for a new password two times, but will not dis
 
 During normal Linux usage you will rarely want to be `root`—only when performing changes to the system configuration, which includes adding or removing users or software and controlling background services. Instead, you should create a less privileged user account for yourself.
 
-Create a New User and Password[¶](#create-a-new-user-and-password "Permalink to this headline")
+Create a New User and Password(#create-a-new-user-and-password "Permalink to this headline")
 -----------------------------------------------------------------------------------------------
 
 In order to add a new user account to the system, log in as `root` (you already have) and execute the `adduser` command (this will add a new user named `kim`, and add a new home directory for `kim` at `/home/kim`):
@@ -67,14 +63,14 @@ If you want to change the password for the user `kim` later, you can use the `pa
 
 passwd kim
 
-Logging In and Out[¶](#logging-in-and-out "Permalink to this headline")
+Logging In and Out(#logging-in-and-out "Permalink to this headline")
 -----------------------------------------------------------------------
 
 You can log out by pressing _CTRL+D_. Alternatively, you can type `exit`.
 
 When logged out, you will see the login prompt. Enter the username that you added in the previous step and press _ENTER_. Next, enter your password (it is not displayed). Press _ENTER_ to complete the login.
 
-Sudo[¶](#sudo "Permalink to this headline")
+Sudo(#sudo "Permalink to this headline")
 -------------------------------------------
 
 To make bigger changes to the system you will often need to use a command that requires `root` (superuser) privileges. Logging out of your user account just to log back in as `root` is inconvenient. Instead, you can temporarily become `root` by either switching to it as `su` (switch user) or give your regular user account `sudo` privileges [2](#id4).
@@ -95,7 +91,7 @@ sudo shutdown now
 
 `sudo` means “switch user and do”.
 
-File System[¶](#file-system "Permalink to this headline")
+File System(#file-system "Permalink to this headline")
 ---------------------------------------------------------
 
 Your system’s file storage is organized in a tree of directories. To move around in it, you use the `cd` command to change the current directory. The top of the hierarchy is called root (not to be confused with the superuser of the same name), but written as the symbol `/`. To go to the root directory, enter:
@@ -128,7 +124,7 @@ man ls
 
 With `man` you can learn more about any command. You should make yourself familiar with the most important commands like `cp` (copy), `mv` (move), `rm` (remove), `mkdir` (make directory), `mount` and `ln` (link). Armed with this knowledge, you will be able to navigate any UNIX-like system, not only Linux.
 
-### Filesystem Hierarchy[¶](#filesystem-hierarchy "Permalink to this headline")
+### Filesystem Hierarchy(#filesystem-hierarchy "Permalink to this headline")
 
 When you issued `ls` at the top of the filesystem (`/`) before, you might have asked yourself what the purpose of all the directories there are.
 
@@ -210,7 +206,7 @@ A good way to explore files and directories that take up disk space is using the
 
 ncdu /
 
-### Home Directory[¶](#home-directory "Permalink to this headline")
+### Home Directory(#home-directory "Permalink to this headline")
 
 If your username is `kim`, your home directory is located at `/home/kim`. There’s a shortcut for your home directory using the tilde symbol `~`. To go to your home directory, you can type:
 
@@ -218,7 +214,7 @@ cd ~
 
 If you list the contents of your home directory, you will see a number of directories with self-explanatory names, such as `Pictures`, `Music`, `Documents` and `Downloads`. The last one is used by web browsers to store downloaded files, for example. Feel free to create your own subdirectories in your home directory as needed.
 
-### Dot Files[¶](#dot-files "Permalink to this headline")
+### Dot Files(#dot-files "Permalink to this headline")
 
 Your home directory also contains a number of hidden files and directories called “dot files”. Their names start with a dot (`.`) and for tidiness, are usually hidden. To see them, use the `-a` flag with `ls`:
 
@@ -226,7 +222,7 @@ ls -a
 
 Often times, dot files contain your personal configuration for certain programs. Many programs collect configuration files in the `~/.config` subdirectory.
 
-### Permissions[¶](#permissions "Permalink to this headline")
+### Permissions(#permissions "Permalink to this headline")
 
 As you are the owner of your home directory, your user account is allowed to modify any files and subdirectories contained in it. But you cannot change system configuration files in `/etc` or delete a command in `/bin`, except if you’re `root`. This is because of the ownership and permission settings on these files and directories.
 
@@ -251,7 +247,7 @@ This invocation first sets an empty list of modes for all users (`a=`) and then 
 
 To learn more about managing modes and ownership, be sure to read the `man` pages for `chmod`, `chown`, and `chgrp`.
 
-### Pipes[¶](#pipes "Permalink to this headline")
+### Pipes(#pipes "Permalink to this headline")
 
 Linux features some advanced concepts that are central to the UNIX philosophy (Linux is a flavor of UNIX). One that you will often encounter is the pipe, symbolized by `|`. You can use pipes to feed the output of one program to the input of another program. For example, you can use the pager `less` to paginate the output of the kernel log:
 
@@ -265,11 +261,11 @@ You can also build more complex pipelines. The following command will output the
 
 dmesg | grep usb | tail -n 5
 
-### Links[¶](#links "Permalink to this headline")
+### Links(#links "Permalink to this headline")
 
 If you list the contents of `/usr/lib` with `ls -l` you will see a number of files that point to another file with an arrow (`->`). This is because the file on the left hand side is a “symbolic link” to the “real” file on the right hand side. Symbolic links and “hard links” can be created using the `ln` command as a means to point to a file using another name. This can be useful to create shortcuts. Refer to the manual page with `man ln` to learn about the details of links.
 
-### Finding Files[¶](#finding-files "Permalink to this headline")
+### Finding Files(#finding-files "Permalink to this headline")
 
 If you don’t remember where you put a file, or want to search a complex hierarchy of directories for something specific, you can use `find`:
 
@@ -283,7 +279,7 @@ rgrep --color spice
 
 This will look for any occurrence of the word “spice” in files in the current directory and its subdirectories, and display each line in which the word was found, with the word itself highlighted.
 
-### Mount[¶](#mount "Permalink to this headline")
+### Mount(#mount "Permalink to this headline")
 
 The root directory `/` is actually a collection of filesystems “mounted” into one virtual filesystem. These can be located on different disks, media or even the network—or be purely virtual in the case of `/dev`, `/proc` or `/sys`.
 
@@ -311,7 +307,7 @@ Before unplugging your stick, you should **unmount** it. This makes sure any pen
 
 sudo umount /mnt
 
-(Environment) Variables[¶](#environment-variables "Permalink to this headline")
+(Environment) Variables(#environment-variables "Permalink to this headline")
 -------------------------------------------------------------------------------
 
 As the shell is not only a command interpreter but also a programming environment, it supports **variables**. These are placeholder names that contain a value that can be changed at any time. For example, you could make a universal greeting command like this:
@@ -335,7 +331,7 @@ USER=kim
 
 This means that another way to reach your home directory is `cd $HOME`, and another way to refer to your username is `$USER`. A critically important variable is `$PATH`, which is a list of directories (separated by “:”) that the shell searches when looking for a command that you want it to execute. For example, when you type `ls`, your shell will only find `/bin/ls` if `/bin` is in your `$PATH` (which should always be the case).
 
-Work with Text Files[¶](#work-with-text-files "Permalink to this headline")
+Work with Text Files(#work-with-text-files "Permalink to this headline")
 ---------------------------------------------------------------------------
 
 Most system configuration is done via by editing text files.
@@ -348,7 +344,7 @@ micro file.txt
 
 While in micro, you can use _CTRL+S_ to save, _CTRL+Q_ to quit, and _CTRL+G_ to display a help menu.
 
-Scripts[¶](#scripts "Permalink to this headline")
+Scripts(#scripts "Permalink to this headline")
 -------------------------------------------------
 
 By now you know most of the ingredients to be able to write **shell scripts**: programs interpreted by the shell. By writing shell scripts, you can create your own commands to extend the capabilities of your computer. Here is an example script that greets the user:
@@ -365,7 +361,7 @@ chmod a+x ./greet.sh
 
 You can learn more about programming the shell by reading its manual page `man sh`. The more advanced `bash` shell is documented in `man bash`.
 
-What Is My Computer Doing?[¶](#what-is-my-computer-doing "Permalink to this headline")
+What Is My Computer Doing?(#what-is-my-computer-doing "Permalink to this headline")
 --------------------------------------------------------------------------------------
 
 You can check your RAM usage, CPU usage, and processes currently running by using `htop`:
@@ -392,7 +388,7 @@ The Linux kernel itself outputs a lot of diagnostic information at boot and when
 
 sudo dmesg -H
 
-Inspect Hardware[¶](#inspect-hardware "Permalink to this headline")
+Inspect Hardware(#inspect-hardware "Permalink to this headline")
 -------------------------------------------------------------------
 
 The following commands are useful to inspect devices connected internally or externally:
@@ -431,19 +427,16 @@ To see a table of interrupts:
 
 sudo cat /proc/interrupts
 
-Clock[¶](#clock "Permalink to this headline")
+Clock(#clock "Permalink to this headline")
 ---------------------------------------------
 
 The motherboard of MNT Reform has a battery-backed real-time clock chip (PCF8523T, U5). This chip saves the date and time even if your system is shut down or loses power. You can interact (as `root`) with the clock using the `hwclock` tool. Review `man hwclock` for the details.
 
-Network[¶](#network "Permalink to this headline")
+Network(#network "Permalink to this headline")
 -------------------------------------------------
-
-MNT Reform has a built-in Gigabit Ethernet (1 GbE) port for networking. Additionally, you can install a Wi-Fi card in the mPCIe slot.
 
 Usually, you want to use a convenient management tool like `connman-gtk` (preinstalled) or `network-manager` (available as Debian package) to easily manage your network connections. If you want to low-level troubleshoot, you can use the `ip` tool:
 
- 
 
 Command
 
@@ -475,44 +468,7 @@ Substitute your username for `kim` and your IP address for `192.168.1.242`. You 
 
 Before using SSH functionality, you should generate a public/private key pair by executing `ssh-keygen`.
 
-External Display[¶](#external-display "Permalink to this headline")
--------------------------------------------------------------------
-
-MNT Reform has an HDMI connector that has different functions depending on the installed CPU module. When using the i.MX8MQ module, you can connect an external HDMI display to this port.
-
-i.MX8MQ has two display engines, LCDIF and DCSS. In the default configuration, DCSS powers the internal display. If you want to use an external display, DCSS has to power HDMI instead. The internal display can then either be turned off or powered by LCDIF. At the time of writing, there is a limitation in i.MX8MQ that prevents the use of LCDIF together with PCIe devices like NVMe storage—the LCDIF output will glitch when the disk is accessed over PCIe. This means that if you want to use a dual display setup with i.MX8MQ and MNT Reform, you have to run your system from eMMC or SD card instead. You can also use external USB3.0 based storage.
-
-The HDMI controller of i.MX8MQ requires a piece of binary firmware that is signed by NXP and loaded by the CPU into the HDMI controller as part of the U-Boot bootloader. If you don’t want to use HDMI, you can download an alternative version of U-Boot with the HDMI firmware stripped out at the MNT Reform website.
-
-The MNT Reform system software comes with a script to select your desired display output mode and reboot:
-
-reform-display-config
-
-Executing the script without any parameters will show you the available options.
-
-Shutdown[¶](#shutdown "Permalink to this headline")
----------------------------------------------------
-
-Before turning off MNT Reform, you should shut down the system cleanly by executing:
-
-shutdown -h now
-
-In the GNOME desktop environment, you can do this—without typing commands—from the menu that appears when you click the power button in the right corner of bar on top of the screen.
-
-In the Debian system shipped with MNT Reform, the shutdown process will ask the System Controller to turn off the power. The OLED display will then show an animation of a disappearing MNT Research logo. In case you have to turn off the power manually (for example if the system is unresponsive or you are using an alternative OS), press _Circle_ and then _0_ (zero).
-
-Standby[¶](#standby "Permalink to this headline")
--------------------------------------------------
-
-The i.MX8MQ system-on-chip can enter a low power standby mode. At the time of writing, we consider this function experimental and are still optimizing it. Don’t rely on the stability of this function and always save your work to disk regardless. In our tests, the power consumption in standby mode is roughly halved compared to the normal working mode.
-
-To enter standby mode, execute the provided `reform-standby` script:
-
-reform-standby
-
-To make the system wake up from standby, select the “Wake” command from the keyboard OLED menu.
-
-Install and Remove Software[¶](#install-and-remove-software "Permalink to this headline")
+Install and Remove Software(#install-and-remove-software "Permalink to this headline")
 -----------------------------------------------------------------------------------------
 
 The Debian GNU/Linux distribution has access to a large number of software packages. No matter which desktop you use, these are centrally managed by “apt”, the package manager. Generally, on a Linux system you rarely download executables from the internet and launch them. Instead, you can cleanly install and remove software packages by using the package manager. Apt also has the ability to search for keywords (or regular expression patterns):
